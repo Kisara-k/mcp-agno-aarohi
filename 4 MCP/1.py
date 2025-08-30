@@ -66,7 +66,7 @@ async def main():
     while True:
         user_question = input("\nAsk me anything (weather or calculation) → ")
         if user_question.strip().lower() in ["exit", "quit"]:
-            print("Goodbye! 👋")
+            print("Goodbye!")
             break
 
         print("\n--- Agent is thinking... ---")

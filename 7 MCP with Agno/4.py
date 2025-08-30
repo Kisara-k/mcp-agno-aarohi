@@ -38,7 +38,7 @@ async def run_agent(message: str):
     )
 
     # Ask the agent something
-    print("\n🤖 Agent Response:\n")
+    print("\nAgent Response:\n")
     await agent.aprint_response(message, stream=True)
 
     # Close connections

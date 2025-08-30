@@ -77,4 +77,4 @@ for step in range(steps):
 
 
 plt.ioff() 
-print("✅ Simulation complete!") 
+print("Simulation complete!") 

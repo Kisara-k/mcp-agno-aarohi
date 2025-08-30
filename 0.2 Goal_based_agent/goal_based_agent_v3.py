@@ -61,7 +61,7 @@ def extract_info_from_cv(text: str):
 # Goal checker
 def check_application_goal(_: str) -> str:
     if all(application_info.values()):
-        return f"✅ You're ready! Name: {application_info['name']}, Email: {application_info['email']}, Skills: {application_info['skills']}."
+        return f"You're ready! Name: {application_info['name']}, Email: {application_info['email']}, Skills: {application_info['skills']}."
     else:
         missing = [k for k, v in application_info.items() if not v]
         return f"⏳ Still need: {', '.join(missing)}"
@@ -81,8 +81,8 @@ agent = initialize_agent(
 )
 
 # Streamlit UI
-st.set_page_config(page_title="🎯 Job Application Assistant", layout="centered")
-st.title("🧠 Goal-Based Agent: Job Application Assistant")
+st.set_page_config(page_title="Job Application Assistant", layout="centered")
+st.title("Goal-Based Agent: Job Application Assistant")
 st.markdown("Tell me your **name**, **email**, and **skills** to complete your application!")
 
 # Session state
@@ -96,7 +96,7 @@ if "application_summary" not in st.session_state:
     st.session_state.application_summary = ""
 
 # Upload resume
-st.sidebar.header("📤 Upload Resume (Optional)")
+st.sidebar.header("Upload Resume (Optional)")
 resume = st.sidebar.file_uploader("Upload your resume", type=["pdf", "txt"])
 
 if resume:
@@ -106,12 +106,12 @@ if resume:
     for key in application_info:
         if extracted[key]:
             application_info[key] = extracted[key]
-    st.sidebar.info("🔍 Extracted info from resume:")
+    st.sidebar.info("Extracted info from resume:")
     for key, value in extracted.items():
         st.sidebar.markdown(f"**{key.capitalize()}:** {value}")
 
 # Reset chat
-if st.sidebar.button("🔄 Reset Chat"):
+if st.sidebar.button("Reset Chat"):
     st.session_state.chat_history.clear()
     st.session_state.goal_complete = False
     st.session_state.download_ready = False
@@ -135,9 +135,9 @@ if user_input:
     if "you're ready" in goal_status.lower():
         st.session_state.goal_complete = True
         summary = (
-            f"✅ Name: {application_info['name']}\n"
-            f"📧 Email: {application_info['email']}\n"
-            f"🛠️ Skills: {application_info['skills']}\n"
+            f"Name: {application_info['name']}\n"
+            f"Email: {application_info['email']}\n"
+            f"Skills: {application_info['skills']}\n"
         )
         st.session_state.application_summary = summary
         st.session_state.download_ready = True
@@ -156,12 +156,12 @@ for sender, message in st.session_state.chat_history:
 
 # Final message
 if st.session_state.goal_complete:
-    st.success("🎉 All information collected! You're ready to apply!")
+    st.success("All information collected! You're ready to apply!")
 
 # Download summary
 if st.session_state.download_ready:
     st.download_button(
-        label="📥 Download Application Summary",
+        label="Download Application Summary",
         data=st.session_state.application_summary,
         file_name="application_summary.txt",
         mime="text/plain"

@@ -62,7 +62,7 @@ async def run_mcp_query(user_input):
 
 def main():
     st.set_page_config(page_title="MCP Math Chat", page_icon="🧮")
-    st.title("🧮 MCP Math Chat (Streamlit)")
+    st.title("MCP Math Chat (Streamlit)")
 
     user_input = st.text_input("Ask me something math-related:")
     if st.button("Send") and user_input.strip():

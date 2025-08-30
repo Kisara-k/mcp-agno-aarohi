@@ -3,7 +3,7 @@
 import logging
 import os
 import uvicorn
-from mcp.server.fastmcp import FastMCP  # ✅ correct import
+from mcp.server.fastmcp import FastMCP  # correct import
 
 logging.basicConfig(level=logging.INFO, format='[%(levelname)s]: %(message)s')
 log = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ def multiply(a: int, b: int) -> int:
 if __name__ == "__main__":
     host = os.getenv("HOST", "0.0.0.0")
     port = int(os.getenv("PORT", "8080"))  # avoid 8000 if something else is using it
-    log.info(f"🚀 Starting Streamable-HTTP MCP server on http://{host}:{port}/mcp")
+    log.info(f"Starting Streamable-HTTP MCP server on http://{host}:{port}/mcp")
     # This returns an ASGI app that serves the MCP endpoint at /mcp
     app = mcp.streamable_http_app()
     uvicorn.run(app, host=host, port=port)

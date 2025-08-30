@@ -48,18 +48,18 @@ def extract_application_info(text: str) -> str:
 
     if name_match: 
         application_info["name"] = name_match.group(1).title()
-        response.append("✅ Name saved.") 
+        response.append("Name saved.") 
 
 
     if email_match:
         application_info["email"] = email_match.group(0)
-        response.append("✅ Email saved.")
+        response.append("Email saved.")
     if skills_match:
         application_info["skills"] = skills_match.group(1).strip()
-        response.append("✅ Skills saved.")
+        response.append("Skills saved.")
 
     if not any([name_match, email_match, skills_match]):
-        return "❓ I couldn't extract any info. Could you please provide your name, email, or skills?"
+        return "I couldn't extract any info. Could you please provide your name, email, or skills?"
 
     return " ".join(response) + " Let me check what else I need."
 
@@ -67,10 +67,10 @@ def extract_application_info(text: str) -> str:
 
 def check_application_goal(_: str) -> str:
     if all(application_info.values()):
-        return f"✅ You're ready! Name: {application_info['name']}, Email: {application_info['email']}, Skills: {application_info['skills']}."
+        return f"You're ready! Name: {application_info['name']}, Email: {application_info['email']}, Skills: {application_info['skills']}."
     else:
         missing = [k for k, v in application_info.items() if not v]
-        return f"⏳ Still need: {', '.join(missing)}. Please ask the user to provide this."
+        return f"Still need: {', '.join(missing)}. Please ask the user to provide this."
 
 
 
@@ -85,7 +85,7 @@ tools = [
         name="check_application_goal",
         func=check_application_goal,
         description="Check if name, email, and skills are provided. If not, tell the user what is missing.",
-        return_direct=True  # ⬅️ Important!
+        return_direct=True  # ⬅ Important!
     )
 
 ]
@@ -108,12 +108,12 @@ agent = initialize_agent(
 )
 
 
-print("📝 Hi! I'm your job application assistant. Please tell me your name, email, and skills.")
+print("Hi! I'm your job application assistant. Please tell me your name, email, and skills.")
 
 while True:
     user_input = input("You: ")
     if user_input.lower() in ["exit", "quit"]:
-        print("👋 Bye! Good luck.")
+        print("Bye! Good luck.")
         break
 
     response = agent.invoke({"input": user_input})
@@ -121,5 +121,5 @@ while True:
 
     # If goal achieved, stop
     if "you're ready" in response["output"].lower():
-        print("🎉 Application info complete!")
+        print("Application info complete!")
         break
